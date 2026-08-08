@@ -20,7 +20,7 @@ always @(posedge clk) begin
     end
 end
 
-    assign sub = ~(in[30]&in[29]&in[28]&in[27]&in[26]&in[25]&in[24]&in[23]);  /* I have gym now,I'll fix this*/
+    assign sub = ~(in[30]&in[29]&in[28]&in[27]&in[26]&in[25]&in[24]&in[23]); 
 /*EXCEPTIONS*/
 assign Inf = (in[30:23] == 8'd255 && (in[22:0] == 23'b0));
 assign NaN = ((in[30:23] == 8'd255) && !(in[22:0] == 23'b0));
