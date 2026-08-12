@@ -25,18 +25,14 @@ module tb_SubNDet;
     // Hierarchical probe of internal (purely combinational) man wire
     wire [23:0] man_p = dut.man;
 
-    // ==========================================================
-    // SVA: reset
-    // ==========================================================
+    
     property p_reset_man_reg;
         @(posedge clk) rst |=> (man_reg == 24'd0);
     endproperty
     a_reset_man_reg: assert property(p_reset_man_reg)
         else $error("[%0t] man_reg not cleared one cycle after rst", $time);
 
-    // ==========================================================
-    // SVA: combinational decode correctness (same-cycle, no $past needed)
-    // ==========================================================
+    
     property p_normal_correct;
         @(posedge clk) disable iff(rst) normal == |in[30:23];
     endproperty
@@ -79,10 +75,8 @@ module tb_SubNDet;
 
     
  
-    // ==========================================================
-    // SVA: no unknowns once out of reset
-    // ==========================================================
-    property p_no_x(logic sig);
+    
+        property p_no_x(logic sig);
         @(posedge clk) disable iff(rst) !$isunknown(sig);
     endproperty
     a_no_x_normal:  assert property(p_no_x(normal))  else $error("[%0t] normal is X/Z", $time);
